@@ -1,9 +1,25 @@
-const initClock = () => {
+(() => {
   const date = new Date();
-  const animationStartTimeByType = {
-    hours: (date.getHours() % 12) * 3600 * -1,
-    minutes: date.getMinutes() * 60 * -1,
-    seconds: date.getSeconds() * -1,
+
+  const convertToPortionOfDegrees = (current, end) => (current / end) * 360;
+
+  const animationStartPositionByType = {
+    hours: convertToPortionOfDegrees(date.getHours() % 12, 12),
+    minutes: convertToPortionOfDegrees(date.getMinutes(), 60),
+    seconds: convertToPortionOfDegrees(date.getSeconds(), 60),
+  };
+
+  const updateAnimationRotationDegrees = (
+    animationNode,
+    attributeName,
+    degrees
+  ) => {
+    const currentValue = animationNode.getAttribute(attributeName);
+    const newValue = currentValue
+      .split(" ")
+      .map((v, i) => (i === 0 ? `${degrees}` : v))
+      .join(" ");
+    animationNode.setAttribute(attributeName, newValue);
   };
 
   document
@@ -11,8 +27,12 @@ const initClock = () => {
     .forEach((animationNode) => {
       const type = animationNode.getAttribute("data-clockhand-type");
 
-      console.log(type, animationStartTimeByType[type]);
+      const startPosition = animationStartPositionByType[type];
+      updateAnimationRotationDegrees(animationNode, "from", startPosition);
 
-      animationNode.beginElementAt(animationStartTimeByType[type]);
+      const endPosition = animationStartPositionByType[type] + 360;
+      updateAnimationRotationDegrees(animationNode, "to", endPosition);
+
+      animationNode.beginElement();
     });
-};
+})();
