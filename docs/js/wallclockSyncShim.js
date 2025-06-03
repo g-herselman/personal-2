@@ -66,6 +66,12 @@ Some major caveats:
     const newBeginAttributeValue = differenceInMilliseconds / 1000 + "s";
 
     animateTransformElement.setAttribute("begin", newBeginAttributeValue);
-    animateTransformElement.replaceWith(animateTransformElement); // Replace the element with itself to retrigger the animation.
+
+    const refreshElement = () =>
+      animateTransformElement.replaceWith(animateTransformElement); // Replace the element with itself to retrigger the animation.
+
+    refreshElement();
+
+    document.addEventListener("focus", refreshElement); // Animations will pause when document is not in focus. Refresh the element when the document regains focus
   });
 })();
