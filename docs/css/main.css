@@ -11,23 +11,44 @@ body {
     font-style: normal;
     color: var(--col-text-main);
     background-color: var(--col-main-background);
+    padding: 3rem 3rem
 }
 
 h1 {
-    font-weight: 500;
-    font-size: 2.5rem;
+
     margin-bottom: 1rem;
+    font-size: 1.8rem;
+}
+
+a {
+   color: var(--col-text-main);
 }
 
 .root-layout {
     display: grid;
     grid-template-columns: minmax(40rem, 3fr) auto;
     gap: 2rem;
-    padding: 0 0 0 4rem;
+
 }
 
 .clock-holder {
     display: flex;
     flex-direction: row;
     justify-content: center;
+}
+
+header {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+
+    .logo {
+        height: 5rem;
+    }
+
+    h1 {
+        margin: 0;
+            font-weight: 500;
+    font-size: 2.5rem;
+    }
 }
