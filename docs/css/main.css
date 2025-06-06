@@ -11,7 +11,7 @@ body {
     font-style: normal;
     color: var(--col-text-main);
     background-color: var(--col-main-background);
-    padding: 3rem 3rem
+    margin: 3rem 3rem
 }
 
 h1 {
@@ -25,11 +25,33 @@ a {
 }
 
 .root-layout {
-    display: grid;
-    grid-template-columns: minmax(40rem, 3fr) auto;
+    display: flex;
+    flex-flow: row wrap;
     gap: 2rem;
 
+
+    .main-section {
+        flex: 1 1 40rem;
+    }
 }
+
+.experience {
+    h2 {
+        margin-bottom: 0;
+    }
+
+    .job-title {
+        font-weight: 500;
+        margin: 0.2rem 0;
+    }
+
+    .date-range {
+        font-style: italic;
+        margin: 0.2rem 0;
+    }
+}
+
+
 
 .clock-holder {
     display: flex;
